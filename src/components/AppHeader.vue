@@ -13,6 +13,7 @@
       <b-navbar-nav>
         <b-nav-item> <router-link to="/" exact>Home</router-link></b-nav-item>
         <b-nav-item><router-link to="/blogs" exact>Blog Post</router-link></b-nav-item>
+        <b-nav-item><router-link to="/addBlog" exact>Add Blog Post</router-link></b-nav-item>
 
         <!-- Navbar dropdowns -->
         <b-nav-item-dropdown text="Lang" right>
