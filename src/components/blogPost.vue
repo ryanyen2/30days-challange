@@ -23,7 +23,16 @@
           class="m-3"
         >
           <b-card-text>
-            {{ blog.body }}
+            Content: {{ blog.content }}
+          </b-card-text>
+           <b-card-text>
+            Author: {{blog.author}}
+          </b-card-text>
+           <b-card-text>
+             HashTags:
+            <ul>
+              <li v-for="hashtag in blog.hashTags" :key="hashtag.id"> # {{ hashtag }}</li>
+            </ul>
           </b-card-text>
 
           <b-button href="#" variant="primary">See More</b-button>
@@ -35,6 +44,8 @@
 
 <script>
 import searchMixin from "../mixins/searchMixin";
+import { db } from "@/config/firebaseConfig.js";
+
 export default {
   data() {
     return {
@@ -42,12 +53,27 @@ export default {
       search: "",
     };
   },
-  created() {
-    this.$http
-      .get("http://jsonplaceholder.typicode.com/posts")
-      .then(function(data) {
-        this.blogs = data.body.slice(0, 10);
+  mounted() {
+    this.getBlogs();
+  },
+  methods: {
+    async getBlogs() {
+      let dbBlogs = await db.collection("blogs").get();
+      const blogs = [];
+      dbBlogs.forEach((doc) => {
+        let appData = doc.data();
+        appData.id = doc.id;
+        blogs.push({
+          id: appData.id,
+          title: appData.title,
+          content: appData.content,
+          author: appData.author,
+          hashTags: appData.hashTags,
+        });
       });
+      this.blogs = blogs;
+      // console.log(this.blogs);
+    },
   },
   mixins: [searchMixin],
 };

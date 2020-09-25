@@ -22,8 +22,9 @@
         </b-nav-item-dropdown>
 
         <b-nav-item-dropdown text="User" right>
-          <b-dropdown-item href="#">Account</b-dropdown-item>
-          <b-dropdown-item href="#">Settings</b-dropdown-item>
+          <b-dropdown-item><router-link to="/login">Login</router-link></b-dropdown-item>
+          <b-dropdown-item><router-link to="/register">Register</router-link></b-dropdown-item>
+          <b-dropdown-item><router-link to="/logout">Logout</router-link></b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-navbar>
@@ -35,8 +36,12 @@ export default {};
 </script>
 
 <style scoped>
+p {
+  color: #ff9900;
+}
+
 li a {
   text-decoration: none;
-  color: white;
+  color: #ff9900;
 }
 </style>
